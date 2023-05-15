@@ -5,5 +5,14 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"exception": "cpp",
+			"limits": "cpp",
+			"new": "cpp",
+			"stdexcept": "cpp",
+			"functional": "cpp",
+			"typeinfo": "cpp"
+		}
+	}
 }

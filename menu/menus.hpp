@@ -8,17 +8,11 @@
 #include <vector>
 
 #include "../cpp_utils/_init.hpp"
+#include "screen.hpp"
 
 
 namespace ConsMenu {
-
-    class Screen {
-        /*
-        Represents a screen. This is something that is displayed to the console.
-        */
-    };
-
-    class Menu : Screen {
+    class Menu : public Screen {
         /*
         Represents a screen for user input to move to other screens.
         */
@@ -72,7 +66,7 @@ namespace ConsMenu {
             /*
             Draws the rest of the menu. Should be overridden.
             */
-            virtual void show() {
+            virtual void show() override {
                 this->base_color.set_console_color();
                 this->show_header();
             };

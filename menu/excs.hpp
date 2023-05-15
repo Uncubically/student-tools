@@ -2,8 +2,8 @@
 #define MENU_EXCS
 
 
+#include <exception>
 
-#include "../exc.hpp"
 
 
 namespace ConsMenu {
@@ -11,37 +11,37 @@ namespace ConsMenu {
     Contains the exceptions used.
     */
     namespace MenuExc {
-        class BaseMenuExc : public Exc::Exception {
+        class BaseMenuExc : public std::exception {
             public:
-                BaseMenuExc(std::string message) : Exc::Exception(message) {};
+                const char* what() const noexcept override {return "Base menu exception.";}
         };
 
 
             //Raised whenever all the menus are exited.
             class MenuExit : public BaseMenuExc {
                 public:
-                    MenuExit() : BaseMenuExc("Exited all menus.") {};
+                    const char* what() const noexcept override {return "Exited from menu.";}
             };
 
             class MenuChExit : public BaseMenuExc {
                 public:
-                    MenuChExit() : BaseMenuExc("Exited choice menu.") {};
+                    const char* what() const noexcept override {return "Exited from choice menu.";}
             };
 
 
             class MenuChInvalidInput : public BaseMenuExc {
                 public:
-                    MenuChInvalidInput(std::string message) : BaseMenuExc(message) {};
+                    const char* what() const noexcept override {return "Invalid choice input.";}
             };
 
                 class MenuChInputNotTag : public MenuChInvalidInput {
                     public:
-                        MenuChInputNotTag() : MenuChInvalidInput("Input is not a valid tag.") {};
+                        const char* what() const noexcept override {return "Input is not a valid tag.";}
                 };
 
                 class MenuChInputInvalidTag : public MenuChInvalidInput {
                     public:
-                        MenuChInputInvalidTag() : MenuChInvalidInput("Input is not a tag listed in the choices.") {};
+                        const char* what() const noexcept override {return "Input is not a tag listed in the choices.";}
                 };
     };
 };
