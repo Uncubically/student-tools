@@ -35,9 +35,6 @@ namespace ConsMenu {
             Console::Color::GenStyle base_color;
 
 
-            Menu() {};
-
-
 
             /*
             Draws the borders found above and below the title and description.

@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <cmath>
 #include <windows.h>
+#include <functional>
 
 #include "./string.hpp"
 #include "./sleep.hpp"
@@ -550,6 +551,40 @@ namespace Console {
     void maximize() {
         SetConsoleDisplayMode(GetStdHandle(STD_OUTPUT_HANDLE), CONSOLE_FULLSCREEN_MODE, NULL);
     };
+
+
+
+    // Prompts the user for input. Restarts whenever it encounters an invalid type.
+    template <typename T>
+    T prompt_user(const char* prompt, bool can_be_blank = false, std::function<bool(T)> check = [](T a)->void {}, std::string blank_input = "::") {
+        T result;
+        while (true) {
+            std::string input;
+            std::cout << prompt;
+            if (can_be_blank) std::cout << "(input \"" + blank_input + "\" to leave blank) ";
+            std::cin >> input;
+
+            if (can_be_blank && input == blank_input) return std::nullopt;
+
+
+
+            if (std::cin.fail()) {
+                std::cout << "Invalid input. Please give an input of the appropriate type." << std::endl;
+                continue;
+            }
+
+            try {
+                check(response);
+            } catch (std::exception& exc) {
+                std::cout << "Invalid input. " << exc.what() << std::endl;
+                continue;
+            }
+
+            break;
+        }
+
+        return result;
+    }
 };
 
 

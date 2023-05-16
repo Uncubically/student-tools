@@ -11,11 +11,11 @@ namespace ConsMenu {
     Represents a screen. This is something that is displayed to the console.
     */
     class Screen {
-
-        // Shows the screen.
-        virtual void show() {
-            Console::clear_console();
-        }
+        public:
+            // Shows the screen.
+            virtual void show() {
+                Console::clear_console();
+            }
     };
 }
 

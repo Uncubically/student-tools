@@ -23,17 +23,11 @@ namespace ConsMenu {
     class Choice {
         public:
             std::string description = "This is the default description.";
-            std::unique_ptr<Menu> menu = std::make_unique<Menu>(Menu());
+            std::unique_ptr<Screen> screen;
 
-            Choice() {};
-            Choice(std::string _description, Menu &_menu) {
+            Choice(std::string _description, Screen &_screen) {
                 this->description = _description;
-                this->menu = std::make_unique<Menu>(_menu);
-            }
-
-
-            void show_menu() {
-                this->menu->show();
+                this->screen = std::make_unique<Screen>(_screen);
             }
     };
 
@@ -279,7 +273,7 @@ namespace ConsMenu {
                     sleep(1);
 
                     Console::clear_console();
-                    this->choices[response.result]->menu->show();
+                    this->choices[response.result]->screen->show();
                 };
             };
     };
